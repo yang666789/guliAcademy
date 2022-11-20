@@ -30,6 +30,7 @@ import java.util.Map;
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/service_edu/teacher")
+@CrossOrigin
 public class EduTeacherController {
 
     @Autowired
@@ -99,6 +100,8 @@ public class EduTeacherController {
             queryWrapper.le("gmt_create", end);
         }
 
+        queryWrapper.orderByDesc("gmt_create");
+
         //分页数据封装到 Page 对象中
         eduTeacherService.page(pageList, queryWrapper);
 
@@ -128,7 +131,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "根据ID修改讲师")
-    @PutMapping("{id}")
+    @PutMapping
     public R updateById(@ApiParam(name = "teacher", value = "讲师对象", required = true)
                         @RequestBody EduTeacher teacher) {
         eduTeacherService.updateById(teacher);

@@ -1,0 +1,21 @@
+server:
+  port: 8002 # 服务端口
+spring:
+  application:
+    name: service_oss # 服务名
+  profiles:
+    active: dev # 环境设置 dev、test、prod
+  servlet:
+    multipart:
+      max-file-size: 10MB # 设置文件最大上传长度
+      max-request-size: 100MB
+
+# 阿里云 OSS
+# 不同的服务器，地址不同
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      keyid: LTAI5t6ig3gRLsmiSbp9P6YT
+      keysecret: SbEumaRpR9cIp1bcvjS3mvFA9np998
+      bucketname: guli-edu-gagayang
