@@ -1,18 +1,22 @@
 package whut.yy.service_edu.service.impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import whut.yy.service_edu.entity.EduSubject;
 import whut.yy.service_edu.entity.SubjectExcel;
+import whut.yy.service_edu.entity.vo.SubjectNode;
 import whut.yy.service_edu.listener.ExcelListener;
 import whut.yy.service_edu.mapper.EduSubjectMapper;
 import whut.yy.service_edu.service.EduSubjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -38,5 +42,29 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<SubjectNode> getSubjectTree() {
+        return recursiveSearch("0");
+    }
+
+    //递归获取课程分类树形结构
+    private List<SubjectNode> recursiveSearch(String id) {
+        QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();
+        wrapper.eq("parent_id", id);
+        List<EduSubject> list = baseMapper.selectList(wrapper);
+        List<SubjectNode> treeList = new ArrayList<>();
+        if (list != null) {
+            for (EduSubject eduSubject : list) {
+                SubjectNode subjectNode = new SubjectNode();
+                BeanUtils.copyProperties(eduSubject, subjectNode);
+//                subjectNode.setId(eduSubject.getId());
+//                subjectNode.setTitle(eduSubject.getTitle());
+                subjectNode.setSon(this.recursiveSearch(eduSubject.getId()));
+                treeList.add(subjectNode);
+            }
+        }
+        return treeList;
     }
 }

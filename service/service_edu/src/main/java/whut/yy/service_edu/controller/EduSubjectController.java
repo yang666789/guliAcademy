@@ -5,13 +5,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import whut.yy.common_util.R;
+import whut.yy.service_edu.entity.vo.SubjectNode;
 import whut.yy.service_edu.service.EduSubjectService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +25,7 @@ import whut.yy.service_edu.service.EduSubjectService;
 @Api(description = "课程分类")
 @RestController
 @RequestMapping("/service_edu/subject")
+@CrossOrigin
 public class EduSubjectController {
 
     @Autowired
@@ -34,6 +36,13 @@ public class EduSubjectController {
     public R addSubject(@ApiParam(required = true) MultipartFile file) {
         subjectService.addSubject(file);
         return R.ok();
+    }
+
+    @ApiOperation(value = "获取课程分类树形结构")
+    @GetMapping
+    public R getTree() {
+        List<SubjectNode> subjectNode = subjectService.getSubjectTree();
+        return R.ok().data("list", subjectNode);
     }
 }
 

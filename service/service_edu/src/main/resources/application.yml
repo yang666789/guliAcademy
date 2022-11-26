@@ -16,3 +16,5 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 查看 sql 语句日志
+  mapper-locations: classpath:whut/yy/service_edu/mapper/xml/*.xml
+  type-aliases-package: whut.yy.service_edu.entity.vo # 实体类别名

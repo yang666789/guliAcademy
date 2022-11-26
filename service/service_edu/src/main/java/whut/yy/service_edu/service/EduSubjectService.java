@@ -3,6 +3,9 @@ package whut.yy.service_edu.service;
 import org.springframework.web.multipart.MultipartFile;
 import whut.yy.service_edu.entity.EduSubject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import whut.yy.service_edu.entity.vo.SubjectNode;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface EduSubjectService extends IService<EduSubject> {
 
     void addSubject(MultipartFile file);
+
+    List<SubjectNode> getSubjectTree();
 }
