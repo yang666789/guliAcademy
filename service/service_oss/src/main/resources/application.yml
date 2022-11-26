@@ -15,7 +15,7 @@ spring:
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-shanghai.aliyuncs.com
-      keyid: LTAI5tCaGhDZctRnU3ZJ8zRU
-      keysecret: d9arnbnPOYX6gA9SkBI0uGmBAvzdHc
-      bucketname: guli-edu-gagayang
+      endpoint: 填写你的节点
+      keyid: 填写你的id
+      keysecret: 填写你的密钥
+      bucketname: 填写你的bucketname
