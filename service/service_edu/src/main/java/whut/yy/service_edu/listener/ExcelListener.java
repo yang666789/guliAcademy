@@ -4,6 +4,8 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import whut.yy.service_base.exception.MyGlobalException;
 import whut.yy.service_edu.entity.EduSubject;
 import whut.yy.service_edu.entity.SubjectExcel;
@@ -21,6 +23,7 @@ public class ExcelListener extends AnalysisEventListener<SubjectExcel> {
     public ExcelListener(EduSubjectService subjectService) {
         this.subjectService = subjectService;
     }
+
 
     //一行一行去读取excle内容
     @Override

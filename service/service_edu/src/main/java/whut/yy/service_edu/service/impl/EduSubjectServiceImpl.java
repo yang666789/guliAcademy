@@ -2,8 +2,12 @@ package whut.yy.service_edu.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import whut.yy.service_edu.entity.EduSubject;
 import whut.yy.service_edu.entity.SubjectExcel;
@@ -30,7 +34,8 @@ import java.util.List;
 public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubject> implements EduSubjectService {
 
     @Autowired
-    EduSubjectService subjectService;
+    @Lazy //不加这个注解，会出现循环引用
+    private EduSubjectService subjectService;
 
     @Override
     public void addSubject(MultipartFile file) {

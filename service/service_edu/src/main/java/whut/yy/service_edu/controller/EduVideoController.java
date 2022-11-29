@@ -50,9 +50,9 @@ public class EduVideoController {
     }
 
     @ApiOperation(value = "删除小节信息")
-    @DeleteMapping("{videoId}")
-    public R deleteVideoById(@PathVariable String videoId) {
-        boolean isSuccess = videoService.removeById(videoId);
+    @DeleteMapping("{id}")
+    public R deleteVideoById(@PathVariable String id) {
+        boolean isSuccess = videoService.removeVideoById(id);
         if (isSuccess)
             return R.ok();
         else return R.error();
