@@ -3,6 +3,8 @@ package whut.yy.service_edu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import whut.yy.common_util.R;
+import whut.yy.service_base.exception.MyGlobalException;
 import whut.yy.service_edu.client.VodClient;
 import whut.yy.service_edu.entity.EduVideo;
 import whut.yy.service_edu.mapper.EduVideoMapper;
@@ -57,8 +59,13 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         //查询小节
         EduVideo eduVideo = baseMapper.selectById(id);
         //删除小节中的视频
-        if (!StringUtils.isEmpty(eduVideo.getVideoSourceId()))
-            vodClient.deleteVideo(eduVideo.getVideoSourceId());
+        if (!StringUtils.isEmpty(eduVideo.getVideoSourceId())) {
+            R r = vodClient.deleteVideo(eduVideo.getVideoSourceId());
+            //远端服务挂了，熔断处理
+            if (!r.getSuccess()) {
+                throw new MyGlobalException(20001, r.getMessage());
+            }
+        }
         //删除小节
         int i = baseMapper.deleteById(id);
         return i > 0;

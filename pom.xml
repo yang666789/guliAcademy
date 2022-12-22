@@ -211,6 +211,16 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--真正依赖了-->
+    <dependencies>
+        <!--springboot中使用jwt，因为java高版本问题要导入此依赖，否则会报错-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

@@ -17,9 +17,8 @@ spring:
       matching-strategy: ant_path_matcher
 
 # 阿里云 视频点播
-# 不同的服务器，地址不同
 aliyun:
-  oss:
+  vod:
     file:
       keyid: 填写你的id
       keysecret: 填写你的密钥

@@ -41,4 +41,11 @@ public class VideoAdminController {
         videoService.batchDeleteVideo(videoIds);
         return R.ok();
     }
+
+    @ApiOperation(value = "获取阿里云视频播放凭证")
+    @GetMapping("getPlayAuth/{videoSourceId}")
+    public R getPlayAuth(@PathVariable String videoSourceId) {
+        String playAuth = videoService.getPlayAuth(videoSourceId);
+        return R.ok().data("playAuth", playAuth);
+    }
 }

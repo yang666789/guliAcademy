@@ -1,4 +1,4 @@
-package whut.yy.service_base;
+package whut.yy.service_base.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .title("网站-课程中心API文档")
                 .description("本文档描述了课程中心微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("yy", "http://atguigu.com", "892940494@qq.com"))
+                .contact(new Contact("gagayang", "http://atguigu.com", "892940494@qq.com"))
                 .build();
     }
 }

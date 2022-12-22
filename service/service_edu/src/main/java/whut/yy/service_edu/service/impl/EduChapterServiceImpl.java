@@ -33,7 +33,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
     @Override
     public List<ChapterVo> getChapterVideoListByCourseId(String courseId) {
-        //最终要的到的数据列表
+        //最终要得到的数据列表
         ArrayList<ChapterVo> chapterVoArrayList = new ArrayList<>();
 
         //获取章节信息

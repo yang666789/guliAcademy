@@ -18,7 +18,7 @@ public class R {
     private String message;
 
     @ApiModelProperty(value = "返回数据")
-    private Map<String, Object> data = new HashMap<String, Object>();
+    private Map<String, Object> data = new HashMap<>();
 
     //构造方法私有，控制外部只能通过静态方法访问
     private R() {

@@ -10,4 +10,6 @@ public interface VideoService {
     void deleteVideo(String videoId);
 
     void batchDeleteVideo(List<String> videoIds);
+
+    String getPlayAuth(String videoSourceId);
 }

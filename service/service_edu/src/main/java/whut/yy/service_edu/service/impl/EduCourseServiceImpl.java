@@ -2,12 +2,17 @@ package whut.yy.service_edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import whut.yy.service_base.exception.MyGlobalException;
 import whut.yy.service_edu.entity.EduCourse;
 import whut.yy.service_edu.entity.EduCourseDescription;
+import whut.yy.service_edu.entity.frontVo.CourseDetailVO;
+import whut.yy.service_edu.entity.frontVo.CourseFrontVO;
 import whut.yy.service_edu.entity.vo.CourseInfoVO;
 import whut.yy.service_edu.entity.vo.CoursePublishVo;
 import whut.yy.service_edu.entity.vo.CourseQuery;
@@ -15,9 +20,11 @@ import whut.yy.service_edu.mapper.EduCourseMapper;
 import whut.yy.service_edu.service.EduChapterService;
 import whut.yy.service_edu.service.EduCourseDescriptionService;
 import whut.yy.service_edu.service.EduCourseService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import whut.yy.service_edu.service.EduVideoService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -163,5 +170,64 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new MyGlobalException(20001, "删除课程失败");
         }
         return true;
+    }
+
+    @Cacheable(value = "EduCourse", key = "'getPopCourses'")
+    @Override
+    public List<EduCourse> getPopCourses() {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        wrapper.last("limit 8");
+        return baseMapper.selectList(wrapper);
+    }
+
+    @Override
+    public Map<String, Object> pageListFront(Page<EduCourse> teacherPage, CourseFrontVO courseQuery) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(courseQuery.getSubjectParentId())) {
+            queryWrapper.eq("subject_parent_id", courseQuery.getSubjectParentId());
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getSubjectId())) {
+            queryWrapper.eq("subject_id", courseQuery.getSubjectId());
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getBuyCountSort())) {
+            queryWrapper.orderByDesc("buy_count");
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getGmtCreateSort())) {
+            queryWrapper.orderByDesc("gmt_create");
+        }
+
+        if (!StringUtils.isEmpty(courseQuery.getPriceSort())) {
+            queryWrapper.orderByDesc("price");
+        }
+
+        baseMapper.selectPage(teacherPage, queryWrapper);
+
+        List<EduCourse> records = teacherPage.getRecords();
+        long current = teacherPage.getCurrent();
+        long pages = teacherPage.getPages();
+        long size = teacherPage.getSize();
+        long total = teacherPage.getTotal();
+        boolean hasNext = teacherPage.hasNext();
+        boolean hasPrevious = teacherPage.hasPrevious();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        return map;
+    }
+
+    @Override
+    public CourseDetailVO getCourseDetailInfo(String courseId) {
+        return baseMapper.getCourseDetailInfo(courseId);
     }
 }

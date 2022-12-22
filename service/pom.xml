@@ -15,6 +15,10 @@
         <module>service_edu</module>
         <module>service_oss</module>
         <module>service_vod</module>
+        <module>service_cms</module>
+        <module>service_acl</module>
+        <module>service_sms</module>
+        <module>service_ucenter</module>
     </modules>
 
     <dependencies>
@@ -35,7 +39,7 @@
         <!--            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
         <!--        </dependency>-->
 
-        <!--        &lt;!&ndash;hystrix依赖，主要是用  @HystrixCommand &ndash;&gt;-->
+        <!--hystrix依赖，主要是用  @HystrixCommand -->
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.cloud</groupId>-->
         <!--            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
@@ -57,6 +61,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!--sentinel熔断-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
         <!--mybatis-plus-->
@@ -126,10 +135,10 @@
         </dependency>
 
         <!--gson-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.google.code.gson</groupId>-->
-        <!--            <artifactId>gson</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

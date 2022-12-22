@@ -5,7 +5,8 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
-import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -87,6 +88,22 @@ public class VideoServiceImpl implements VideoService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new MyGlobalException(20001, "批量删除阿里云视频出错");
+        }
+    }
+
+    @Override
+    public String getPlayAuth(String videoSourceId) {
+        try {
+            DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(
+                    ConstantPropertiesUtil.ACCESS_KEY_ID,
+                    ConstantPropertiesUtil.ACCESS_KEY_SECRET);
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            request.setVideoId(videoSourceId);
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+            return response.getPlayAuth();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new MyGlobalException(20001, "获取视频播放凭证失败");
         }
     }
 }

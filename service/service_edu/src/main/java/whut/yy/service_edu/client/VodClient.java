@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import whut.yy.common_util.R;
+import whut.yy.service_edu.client.fallback.VodClientFallback;
+import whut.yy.service_edu.config.FeignConfiguration;
 
 import java.util.List;
 
-@FeignClient("service-vod")
+@FeignClient(name = "service-vod", fallback = VodClientFallback.class,
+        configuration = FeignConfiguration.class)
 public interface VodClient {
 
     @DeleteMapping("/service_vod/video/{videoId}")
