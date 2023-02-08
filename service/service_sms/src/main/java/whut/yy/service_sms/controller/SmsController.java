@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 @Api(description = "短信服务")
 @RestController
 @RequestMapping("/service_sms/message")
-@CrossOrigin
 public class SmsController {
 
     @Autowired

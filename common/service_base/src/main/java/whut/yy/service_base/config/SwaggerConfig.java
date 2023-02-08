@@ -23,7 +23,7 @@ public class SwaggerConfig {
                 .apiInfo(webApiInfo())
                 .select()
                 //设置接口文档不生成包含下面路径的接口说明
-                .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
+//                .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
                 .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
 

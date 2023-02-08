@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 @Api(description = "用户中心")
 @RestController
 @RequestMapping("/ucenter/member")
-@CrossOrigin
 public class UcenterMemberController {
     @Autowired
     private UcenterMemberService memberService;
@@ -60,6 +59,12 @@ public class UcenterMemberController {
     public R register(@RequestBody RegisterVo registerVo) {
         memberService.register(registerVo);
         return R.ok();
+    }
+
+    @ApiOperation(value = "获取某日注册用户的人数(供统计数据服务远程调用)")
+    @GetMapping("getUserRegisterNum/{date}")
+    public int getUserRegisterNum(@PathVariable String date){
+        return memberService.getUserRegisterNum(date);
     }
 }
 

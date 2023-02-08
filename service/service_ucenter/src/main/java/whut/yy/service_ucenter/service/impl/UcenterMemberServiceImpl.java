@@ -1,12 +1,12 @@
 package whut.yy.service_ucenter.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.Api;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import whut.yy.common_util.JwtUtils;
 import whut.yy.common_util.MD5;
 import whut.yy.service_base.exception.MyGlobalException;
@@ -15,8 +15,6 @@ import whut.yy.service_ucenter.entity.vo.LoginVo;
 import whut.yy.service_ucenter.entity.vo.RegisterVo;
 import whut.yy.service_ucenter.mapper.UcenterMemberMapper;
 import whut.yy.service_ucenter.service.UcenterMemberService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -94,5 +92,11 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("openid", openid);
         return baseMapper.selectOne(wrapper);
+    }
+
+    //获取某日用户注册人数
+    @Override
+    public int getUserRegisterNum(String date) {
+        return baseMapper.getUserRegisterNum(date);
     }
 }

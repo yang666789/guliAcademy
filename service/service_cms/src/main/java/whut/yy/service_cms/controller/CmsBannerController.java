@@ -25,7 +25,6 @@ import java.util.List;
 @Api(description = "轮播图相关")
 @RestController
 @RequestMapping("/service_cms/banner")
-@CrossOrigin
 public class CmsBannerController {
 
     @Autowired

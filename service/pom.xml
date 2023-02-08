@@ -19,6 +19,8 @@
         <module>service_acl</module>
         <module>service_sms</module>
         <module>service_ucenter</module>
+        <module>service_order</module>
+        <module>service_statistic</module>
     </modules>
 
     <dependencies>
@@ -50,6 +52,17 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <!-- nacos客户端依赖包-服务配置 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--在 bootstrap.yml 文件中配置注册服务的地址信息时，要引入下面依赖，能加载 bootstrap 文件-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
         <!--服务调用-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -12,7 +12,6 @@ import whut.yy.service_vod.service.VideoService;
 import java.util.List;
 
 @Api(description = "阿里云视频点播服务")
-@CrossOrigin //跨域
 @RestController
 @RequestMapping("/service_vod/video")
 public class VideoAdminController {

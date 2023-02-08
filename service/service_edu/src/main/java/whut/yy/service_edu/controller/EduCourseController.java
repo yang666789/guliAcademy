@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import whut.yy.common_util.R;
 import whut.yy.service_edu.entity.EduCourse;
 import whut.yy.service_edu.entity.vo.CourseInfoVO;
@@ -28,7 +27,6 @@ import java.util.List;
 @Api(description = "课程相关")
 @RestController
 @RequestMapping("/service_edu/course")
-@CrossOrigin
 public class EduCourseController {
     @Autowired
     private EduCourseService courseService;

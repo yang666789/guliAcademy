@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import whut.yy.common_util.JwtUtils;
@@ -21,7 +20,6 @@ import java.util.HashMap;
 @Api(description = "微信登录")
 @Controller //注意这里没有配置 @RestController,因为要解析成重定向
 @RequestMapping("/api/ucenter/wx")
-@CrossOrigin
 public class WxApiController {
 
     @Autowired

@@ -30,7 +30,6 @@ import java.util.Map;
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/service_edu/teacher")
-@CrossOrigin
 public class EduTeacherController {
 
     @Autowired

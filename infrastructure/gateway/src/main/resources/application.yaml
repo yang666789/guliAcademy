@@ -1,0 +1,49 @@
+##应用级别的参数配置
+#server:
+#  port: 8222
+#
+#spring:
+#  application:
+#    name: service-gateway
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848 #nacos服务地址
+#    gateway:
+#      #网关路由配置
+#      routes:
+#        - id: service-acl
+#          uri: lb://service-acl
+#          predicates:
+#            - Path=/*/acl/** # 路径匹配
+#        - id: service-edu # 路由id，自定义，只要唯一即可
+#          uri: lb://service-edu # 路由的目标地址，lb是负载均衡，后面跟服务名称
+#          predicates:
+#            - Path=/service_edu/** # 路径匹配
+#        - id: service-oss
+#          uri: lb://service-oss
+#          predicates:
+#            - Path=/service_oss/** # 路径匹配
+#        - id: service-vod
+#          uri: lb://service-vod
+#          predicates:
+#            - Path=/service_vod/** # 路径匹配
+#        - id: service-cms
+#          uri: lb://service-cms
+#          predicates:
+#            - Path=/service_cms/** # 路径匹配
+#        - id: service-sms
+#          uri: lb://service-sms
+#          predicates:
+#            - Path=/service_sms/** # 路径匹配
+#        - id: service-ucenter
+#          uri: lb://service-ucenter
+#          predicates:
+#            - Path=/ucenter/**,/api/ucenter/** # 多条路径匹配
+#        - id: service-order
+#          uri: lb://service-order
+#          predicates:
+#            - Path=/service_order/** # 路径匹配
+#        - id: service-statistic
+#          uri: lb://service-statistic
+#          predicates:
+#            - Path=/service_statistic/** # 路径匹配

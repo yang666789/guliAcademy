@@ -8,7 +8,6 @@ import whut.yy.common_util.R;
 @Api(description = "登录管理")
 @RestController
 @RequestMapping("/service_edu/user")
-@CrossOrigin
 public class EduLoginController {
 
     @ApiOperation(value = "登录")

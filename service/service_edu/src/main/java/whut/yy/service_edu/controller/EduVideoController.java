@@ -22,7 +22,6 @@ import whut.yy.service_edu.service.EduVideoService;
 @Api(description = "小节信息")
 @RestController
 @RequestMapping("/service_edu/video")
-@CrossOrigin
 public class EduVideoController {
 
     @Autowired
